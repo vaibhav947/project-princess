@@ -6,13 +6,14 @@
     "node": "20"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next export",
+    "dev": "NODE_OPTIONS='--openssl-legacy-provider' next dev",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' next build",
+    "export": "NODE_OPTIONS='--openssl-legacy-provider' next export",
     "start": "next start -p 80",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "deploy": "NODE_OPTIONS='--openssl-legacy-provider' next build && NODE_OPTIONS='--openssl-legacy-provider' next export && touch out/.nojekyll && gh-pages -d out -t true"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^9.5.2",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "gh-pages": "^6.3.0"
   }
 }
